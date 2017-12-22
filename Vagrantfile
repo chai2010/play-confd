@@ -31,19 +31,8 @@ Vagrant.configure(2) do |config|
   # https://www.vagrantup.com/docs/provisioning/basic_usage.html
   config.vm.provision "shell", path: "bootstrap.sh"
   config.vm.provision "shell", inline: <<-SHELL
-    uname -a
-    lsb_release -a
-
-    # install docker
-    # https://docs.docker.com/engine/installation/linux/docker-ce/centos/#set-up-the-repository
-
-    sudo yum remove docker docker-common docker-selinux docker-engine
-    sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-    sudo yum install -y docker-ce
-    sudo systemctl start docker
-    sudo docker run hello-world
-
+    docker pull hello-world
+    docker run  hello-world
     echo "done"
   SHELL
 end
